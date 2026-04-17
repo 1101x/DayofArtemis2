@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>그려욤 슥슥슥</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <video id="webcam" autoplay playsinline muted></video>
+  <canvas id="drawCanvas"></canvas>
+
+  <!-- Mode badge (top-left) -->
+  <div id="modeIndicator">
+    <div id="modeDot"></div>
+    <span id="modeText">대기 중</span>
+  </div>
+
+  <!-- Controls: right side, vertical -->
+  <div id="controls">
+    <button id="btnDraw" class="ctrl-btn">
+      <span class="btn-label">그리기</span>
+      <div class="dwell-fill" id="dwellDraw"></div>
+    </button>
+    <button id="btnErase" class="ctrl-btn">
+      <span class="btn-label">지우기</span>
+      <div class="dwell-fill" id="dwellErase"></div>
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div id="loadingOverlay">
+    <p id="loadingText">애플 파이를 먹으며🥧 미디어 파이 로딩 중…</p>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>

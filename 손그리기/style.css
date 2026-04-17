@@ -1,0 +1,105 @@
+/* ── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ── Webcam ─────────────────────────────────────────────── */
+#webcam {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+/* ── Drawing canvas ─────────────────────────────────────── */
+#drawCanvas {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+/* ── Mode indicator (top-left) ──────────────────────────── */
+#modeIndicator {
+  position: fixed;
+  top: 24px; left: 24px;
+  display: flex; align-items: center; gap: 10px;
+  color: rgba(255,255,255,.75);
+  font-size: 13px;
+  letter-spacing: .06em;
+  z-index: 10;
+}
+#modeDot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.35);
+  transition: background .3s, box-shadow .3s;
+}
+#modeIndicator.draw-mode #modeDot {
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 4px #4ade80; }
+  50%      { box-shadow: 0 0 12px #4ade80; }
+}
+
+/* ── Controls: right side, vertical ─────────────────────── */
+#controls {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 10;
+}
+
+/* ── Button base ─────────────────────────────────────────── */
+.ctrl-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 16px 36px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 0;
+  cursor: pointer;
+  letter-spacing: .07em;
+  transition: background .15s;
+  user-select: none;
+}
+.ctrl-btn:hover { background: rgba(255,255,255,.08); }
+.ctrl-btn.active { background: rgba(255,255,255,.14); }
+
+/* Label sits above the fill */
+.btn-label {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Dwell fill (left → right wipe) ─────────────────────── */
+/* dwell-fill 사용 안 함 — 숨김 */
+.dwell-fill { display: none; }
+
+
+
+
+/* ── Loading overlay ─────────────────────────────────────── */
+#loadingOverlay {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.78);
+  z-index: 20;
+  transition: opacity .5s;
+}
+#loadingOverlay.hidden { opacity: 0; pointer-events: none; }
+#loadingText { color: #fff; font-size: 18px; letter-spacing: .04em; }
